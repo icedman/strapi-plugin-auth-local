@@ -35,12 +35,18 @@ module.exports = {
     let user = await strapi.plugins['users-permissions'].models.user
         .findOne({ email: credentials.email });
 
-    if (!strapi.plugins['users-permissions'].services.user.validatePassword(credentials.password, user['password'])) {
-        ctx.send({
+    if (!user) {
+      console.log('invalid email ' + credentials.email);
+      return ctx.send({
           error: 'invalid login'
         });
-        console.log('error');
-        return;
+    }
+
+    if (!strapi.plugins['users-permissions'].services.user.validatePassword(credentials.password, user['password'])) {
+      console.log('invalid password');
+      return ctx.send({
+          error: 'invalid login'
+        });
     }
 
     ctx.send({
