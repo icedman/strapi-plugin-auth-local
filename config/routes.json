@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "handler": "AuthLocal.index",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "handler": "AuthLocal.login",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
